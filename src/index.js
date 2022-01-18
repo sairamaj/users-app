@@ -36,11 +36,14 @@ class User extends React.Component {
     }
     else {
       return (
-        <div>
+        <table align='center'>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
           {this.state.contacts.map((item) =>
             <Contact contact={item} />
           )}
-        </div>
+        </table>
       )
     }
   }
