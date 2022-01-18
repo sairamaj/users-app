@@ -1,17 +1,54 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './index.css'
+
+class Contact extends React.Component {
+  render() {
+    return (
+      <tr>
+        <td><label>{this.props.contact.Name}</label></td>
+        <td><label>{this.props.contact.Phone}</label></td>
+        <td><label>{this.props.contact.Email}</label></td>
+      </tr>
+    )
+  }
+}
+
+class User extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      loading: true,
+      contacts: []
+    }
+  }
+  componentDidMount() {
+    const apiUrl = 'https://0rd4fxo8bc.execute-api.us-west-2.amazonaws.com/prod/users/contacts';
+    fetch(apiUrl)
+      .then(async (response) => {
+        this.setState({ loading: false, contacts: await response.json() });
+      });
+  }
+
+  render() {
+    if (this.state.loading) {
+      return (<label>loading...</label>)
+    }
+    else {
+      return (
+        <div>
+          {this.state.contacts.map((item) =>
+            <Contact contact={item} />
+          )}
+        </div>
+      )
+    }
+  }
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <User />
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
