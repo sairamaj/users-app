@@ -1,5 +1,6 @@
 import React from 'react';
 import Contact from './contact.js'
+import { Link } from 'react-router-dom';
 
 class User extends React.Component {
     constructor(props) {
@@ -23,14 +24,17 @@ class User extends React.Component {
         }
         else {
             return (
-                <table align='center'>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    {this.state.contacts.map((item) =>
-                        <Contact contact={item} />
-                    )}
-                </table>
+                <div>
+                    {/* <Link to="foo" className="btn btn-sm btn-success mb-2">Add Contact</Link> */}
+                    <table align='center'>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        {this.state.contacts.map((item) =>
+                            <Contact contact={item} />
+                        )}
+                    </table>
+                </div>
             )
         }
     }
