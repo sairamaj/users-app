@@ -1,8 +1,18 @@
 import React from 'react';
-import Contact from './contact.js'
-import { Link } from 'react-router-dom';
 
-class User extends React.Component {
+class Contact extends React.Component {
+    render() {
+        return (
+            <tr>
+                <td><label>{this.props.contact.Name}</label></td>
+                <td><label>{this.props.contact.Phone}</label></td>
+                <td><label>{this.props.contact.Email}</label></td>
+            </tr>
+        )
+    }
+}
+
+class ContactContainer extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -40,4 +50,4 @@ class User extends React.Component {
     }
 }
 
-export default User
+export { ContactContainer };
